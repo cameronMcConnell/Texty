@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { FileDropDown, ViewDropDown, EditDropDown } from './dropdowns'
 import { TextInput } from './textinput'
+import { invoke } from '@tauri-apps/api/tauri'
 
 export default function Home(): JSX.Element {
   let [fileMenu, setFileMenu] = useState<boolean>(false);
@@ -14,7 +15,7 @@ export default function Home(): JSX.Element {
   const textareaRef: React.RefObject<HTMLTextAreaElement> = useRef<HTMLTextAreaElement>(null);
 
   const fileDropdownProps = {data: textInputData};
-  const editDropdownProps = {textareaRef: textareaRef};
+  const editDropdownProps = {setData: setTextInputData, textareaRef: textareaRef};
   const viewDropdownProps = {textareaRef: textareaRef, fontSize: textInputFontSize, setTextInputFontSize: setTextInputFontSize};
   const textInputProps = {setData: setTextInputData, fontSize: textInputFontSize, textareaRef: textareaRef};
 
@@ -45,15 +46,18 @@ export default function Home(): JSX.Element {
     <div className="flex flex-col w-screen h-screen" onClick={() => clearMenus()}>
       <header className="shadow p-3 bg-neutral-100">
         <div className="flex flex-row grow-0 gap-x-5 p-0 text-lg">
-          <div 
+          <div
+            key={0}
             className="relative hover:bg-neutral-200 hover:cursor-pointer p-1 rounded"
             onClick={() => setFileMenu(!fileMenu)}
           > File {fileMenu ? <FileDropDown {...fileDropdownProps} /> : ''} </div>
-          <div 
+          <div
+            key={1}
             className="relative hover:bg-neutral-200 hover:cursor-pointer p-1 rounded"
             onClick={() => setEditMenu(!editMenu)}
           > Edit {editMenu ? <EditDropDown {...editDropdownProps} /> : ''} </div>
-          <div 
+          <div
+            key={2}
             className="relative hover:bg-neutral-200 hover:cursor-pointer p-1 rounded"
             onClick={() => setViewMenu(!viewMenu)}
           > View {viewMenu ? <ViewDropDown {...viewDropdownProps} /> : ''} </div>

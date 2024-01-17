@@ -21,6 +21,7 @@ export const TextInput = (props: textInputProps): JSX.Element => {
 
   return (
     <textarea
+      key={3}
       style={{fontSize: props.fontSize}}
       className="grow px-[16px] my-1 py-2 font-sans" 
       ref={props.textareaRef}

@@ -5,6 +5,7 @@ export interface fileDropdownProps {
 }
 
 export interface editDropdownProps {
+  setData: React.Dispatch<SetStateAction<string>>,
   textareaRef: React.RefObject<HTMLTextAreaElement>
 }
 
