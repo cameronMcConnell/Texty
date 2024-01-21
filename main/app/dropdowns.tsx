@@ -1,5 +1,6 @@
 import { fileDropdownProps, editDropdownProps, viewDropdownProps } from "./props"
 import { readText, writeText } from '@tauri-apps/api/clipboard'
+import { WebviewWindow } from '@tauri-apps/api/window'
 
 const FileDropDown = (props: fileDropdownProps): JSX.Element => {
   const handleSave = (e: React.MouseEvent<HTMLTableRowElement>): void => {
@@ -10,10 +11,14 @@ const FileDropDown = (props: fileDropdownProps): JSX.Element => {
 
   }
 
-  const tableRows: any[] = [["Save", "Ctrl + S", handleSave], ["Save As", "Ctrl + Shift + S", handleSaveAs]];
+  const handleNewWindow = async (e: React.MouseEvent<HTMLTableRowElement>): Promise<void> => {
+
+  }
+
+  const tableRows: any[] = [["Save", "Ctrl + S", handleSave], ["Save As", "Ctrl + Shift + S", handleSaveAs], ["Open New Window", "Ctrl + O", handleNewWindow]];
 
   return (
-    <div className="absolute w-[210px] left-0 bg-neutral-100 p-1 rounded shadow">
+    <div className="absolute w-[310px] left-0 bg-neutral-100 p-1 rounded shadow">
       <table>
         {tableRows.map((row) => (
           <tr className="hover:bg-neutral-200" onClick={row[2]}>
@@ -49,7 +54,7 @@ const EditDropDown = (props: editDropdownProps): JSX.Element => {
       props.setData(newText);
 
       props.textareaRef.current.value = newText;
-      props.textareaRef.current.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+      props.textareaRef.current.setSelectionRange(selectionEnd + clipboardText!.length, selectionEnd + clipboardText!.length);
     }
   }
 
@@ -65,7 +70,7 @@ const EditDropDown = (props: editDropdownProps): JSX.Element => {
       props.setData(newText);
 
       props.textareaRef.current.value = newText;
-      props.textareaRef.current.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+      props.textareaRef.current.setSelectionRange(selectionStart, selectionStart);
     }
   }
 

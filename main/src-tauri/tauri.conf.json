@@ -17,6 +17,9 @@
         "all": true,
         "readText": true,
         "writeText": true
+      },
+      "window": {
+        "all": true
       }
     },
     "bundle": {

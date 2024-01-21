@@ -2,7 +2,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { FileDropDown, ViewDropDown, EditDropDown } from './dropdowns'
 import { TextInput } from './textinput'
-import { invoke } from '@tauri-apps/api/tauri'
 
 export default function Home(): JSX.Element {
   let [fileMenu, setFileMenu] = useState<boolean>(false);
